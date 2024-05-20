@@ -1,0 +1,20 @@
+{
+  "exclude": [
+    "node_modules",
+    "test",
+    "./jest.config.js"
+  ],
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "allowJs": true,
+    "outDir": "./build",
+    "rootDir": "./lib",
+    "checkJs": false,
+    "declaration": true,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "strict": true
+  }
+}
