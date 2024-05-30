@@ -117,3 +117,63 @@ for(const balance of balances) {
     console.log(`[${balance.advancedBalanceId}] (${balance.currency}) \n\tAvalable for deposit: ${balance.availableCurrenciesForDeposit.join(', ')}`);
 }
 ```
+
+### Create order
+
+```js
+const OnChainPay = require('onchainpay-sdk');
+
+(async () => {
+    const orderLink = await createOrder("USDT", "tron", "1000")
+
+    //
+})();
+
+const createOrder = async (currency, network, amount) => {
+    const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
+
+    const advancedBalances = await client.account.getBalances();
+
+    const advancedBalance = advancedBalances[0];
+
+    const order = await client.order.makeOrder({
+        advancedBalanceId: advancedBalance.advancedBalanceId,
+        currency: currency,
+        network: network,
+        amount: amount,
+        order: 'Order #1234567',
+        errorWebhook: 'https://merchant.domain/webhook-url',
+        successWebhook: 'https://merchant.domain/webhook-url',
+        returnUrl: 'https://merchant.domain',
+        description: 'Buy some item',
+    });
+
+    return order.link;
+};
+```
+
+### Auto-swap to external address
+
+```js
+const OnChainPay = require('onchainpay-sdk');
+
+(async () => {
+    const autoSwapId = await makeWithdrawal("USDT", "tron", "TUfVHn...DDC", "100")
+
+    //
+})();
+
+const makeWithdrawal = async (currency, network, address, amount) => {
+    const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
+
+    const swap = await client.autoSwap.createAutoSwaps({
+        address: address,
+        currency: currency,
+        network: network,
+        amountTo: amount,
+        webhookUrl: 'https://merchant.domain/webhook-url',
+    });
+
+    return swap.id;
+};
+```
