@@ -14,7 +14,7 @@ import {
 
 export default class BaseRequest extends BaseClass {
 
-  testConnection(): OCPAPIReturnType {
+  checkSignature(): OCPAPIReturnType {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder();
       this.headerBuilder.setData(data);

@@ -21,9 +21,9 @@ export default class BaseClass {
     this.axiosInstance = axiosInstance;
   }
 
-  protected exceptionWrapper(cb: Function): OCPAPIReturnType {
+  protected async exceptionWrapper(cb: Function): OCPAPIReturnType {
     try {
-      return cb();
+      return await cb();
     } catch (exp: any) {
       //console.log('Error occured', exp.message);
       throw new Error(exp.message);
