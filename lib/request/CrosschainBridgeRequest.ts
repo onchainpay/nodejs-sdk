@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { 
   TCrosschainTransferCommissionToken, 
@@ -14,90 +11,18 @@ import {
 export default class CrosschainBridgeRequest extends BaseClass {
 
   getCrosschainTransferLimits() {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder();
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/bridge/limit',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseCrosschainBridgeLimit;
-    });
+    return this.core.makeRequest<TResponseCrosschainBridgeLimit>('/bridge/limit');
   }
 
   getCrosschainTransferInfo(id: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/bridge/get',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseCrosschainBridge;
-    });
+    return this.core.makeRequest<TResponseCrosschainBridge>('/bridge/get', { id });
   }
 
   getCrosschainTransferCommissionToken(req: TCrosschainTransferCommissionToken) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/bridge/fee-token',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseCrosschainBridgeFeeToken;
-    });
+    return this.core.makeRequest<TResponseCrosschainBridgeFeeToken>('/bridge/fee-token', req);
   }
 
   createCrosschainTransfer(req: TCrosschainTransferRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/bridge/create',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error, requestId } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseCrosschainBridge;
-    });
+    return this.core.makeRequest<TResponseCrosschainBridge>('/bridge/create', req);
   }
 }

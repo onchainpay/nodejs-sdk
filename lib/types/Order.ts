@@ -5,7 +5,6 @@ import {TResponseOrphanDeposit} from './OrphanTransaction';
 export type TOrderStatus = 'init' | 'error' | 'processed' | 'pending' | 'expired' | 'partial' | 'overpaid';
 
 export type TOrderEntity = {
-  advancedBalanceId: string;
   currency: string;
   network: string;
   amount: string;

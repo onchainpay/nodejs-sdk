@@ -13,7 +13,6 @@ export type TBlockchainTrxByAddressFilter = {
 };
 
 export type TBusinessWalletAddress = {
-  advancedBalanceId: string;
   currency: string;
   network: string;
   alias: string;

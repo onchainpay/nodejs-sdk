@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { 
   TPaymentLinkRequest, 
@@ -17,178 +14,34 @@ import {
 
 export default class RecurringPaymentRequest extends BaseClass {
   createPaymentLink(req: TPaymentLinkRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/create-subscriber-billing-link',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseBillingLink;
-    });
+    return this.core.makeRequest<TResponseBillingLink>('/recurrents/create-subscriber-billing-link', req);
   }
 
   getPaymentLink(id: string, merchantId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id, merchantId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/get-billing-link',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseSubscriptionBillingLink;
-    });
+    return this.core.makeRequest<TResponseSubscriptionBillingLink>('/recurrents/get-billing-link', { id, merchantId });
   }
 
   getPaymentLinksByUser(req: TPaymentLinksByUserRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/get-billing-links-by-subscriber',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseSubscriptionBillingLink[];
-    });
+    return this.core.makeRequest<TResponseSubscriptionBillingLink[]>('/recurrents/get-billing-links-by-subscriber', req);
   }
 
   disablePaymentLink(id: string, merchantId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id, merchantId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/disable-subscriber-billing-link',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseDisableSubscriptionBillingLink;
-    });
+    return this.core.makeRequest<TResponseDisableSubscriptionBillingLink>('/recurrents/disable-subscriber-billing-link', { id, merchantId });
   }
 
   createSubscription(req: TSubscriptionRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/create-subscription',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseSubscription;
-    });
+    return this.core.makeRequest<TResponseSubscription>('/recurrents/create-subscription', req);
   }
  
   getSubscription(id: string, merchantId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id, merchantId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/get-subscription',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseSubscription;
-    });
+    return this.core.makeRequest<TResponseSubscription>('/recurrents/get-subscription', { id, merchantId });
   }
 
   cancelSubscription(id: string, merchantId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id, merchantId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/cancel-subscription',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseSubscription;
-    });
+    return this.core.makeRequest<TResponseSubscription>('/recurrents/cancel-subscription', { id, merchantId });
   }
 
   createPayment(req: TPaymentRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrents/make-payment',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseRecurrentPayment;
-    });
+    return this.core.makeRequest<TResponseRecurrentPayment>('/recurrents/make-payment', req);
   }
 }

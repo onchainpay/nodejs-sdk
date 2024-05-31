@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { TNullableString } from '../types/Base';
 import { 
@@ -15,90 +12,18 @@ import {
 export default class AddressRequest extends BaseClass {
 
   addAddress(req: TNewAddressEntity) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/address-book/add',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseAddressBookRecord;
-    });
+    return this.core.makeRequest<TResponseAddressBookRecord>('/address-book/add', req);
   }
 
-  deleteAddress(addressId: TNullableString = null) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ addressId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/address-book/remove',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return success;
-    });
+  deleteAddress(addressId: string) {
+    return this.core.makeRequest<null>('/address-book/remove', { addressId });
   }
 
   updateAddress(req: TExistingAddressEntity) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/address-book/update',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return success;
-    });
+    return this.core.makeRequest<null>('/address-book/update', req);
   }
 
   getListOfAddresses(req: TAddressPagination) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/address-book/get',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseGetListOfAddresses;
-    });
+    return this.core.makeRequest<TResponseGetListOfAddresses>('/address-book/get', req);
   }
 }

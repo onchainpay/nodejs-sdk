@@ -1,14 +1,12 @@
 import { TNullableString } from './Base'
 
 export type TWithdrawalCommissionRequest = {
-  advancedBalanceId: string;
   addressId: string;
   amount: string;
   native: boolean | null;
 };
 
 export type TWithdrawalRequest = {
-  advancedBalanceId: string;
   addressId: string;
   address: string;
   amount: string;

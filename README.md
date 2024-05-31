@@ -36,13 +36,21 @@ const client = new OnChainPay('__PUBLIC_KEY__', '__PRIVATE_KEY__');
 You can test your signature within this method.
 
 ```js
-try {
-    await client.base.checkSignature();
+const checkSignature = await client.base.checkSignature();
+
+if(!checkSignature.success) {
+    console.error('Request error', checkSignature.error);
     
-    console.log('Signature correct');
-} catch (error) {
-    console.error('Signature incorrect', error);
+    process.exit(1);
 }
+
+if(!checkSignature.response.checkSignatureResult) {
+    console.error('Signature incorrect', checkSignature.response.errors);
+
+    process.exit(1);
+}
+
+console.log('Signature correct');
 ```
 
 ### Fetch available currencies
@@ -50,15 +58,15 @@ try {
 Get list of available currencies for depositing/withdrawing
 
 ```js
-let availableCurrencies = [];
+const availableCurrencies = await client.base.availableCurrencies();
 
-try {
-    availableCurrencies = client.base.availableCurrencies();
-} catch (error) {
-    console.log('Request error', error);
+if(!availableCurrencies.success) {
+    console.error('Request error', availableCurrencies.error);
+
+    process.exit(1);
 }
 
-for(const currency of availableCurrencies) {
+for(const currency of availableCurrencies.response) {
     console.log(`${currency.currency} (${currency.alias}) = ${currency.priceUSD}`);
 
     if (currency.networks) {
@@ -77,13 +85,15 @@ Get price rate from one currency to another
 
 
 ```js
-try {
-    const price = client.base.priceRate('ETH', 'USDT');
-    
-    console.log('Price', price);
-} catch (error) {
-    console.log('Request error', error);
+const price = await client.base.priceRate('ETH', 'USDT');
+
+if(!price.success) {
+    console.error('Request error', price.error);
+
+    process.exit(1);
 }
+
+console.log('Price', price.response);
 ```
 
 ### Get advanced balances info
@@ -91,29 +101,29 @@ try {
 Get info about advanced balance by its id
 
 ```js
-let balance;
+const balance = await client.account.getBalance();
 
-try {
-    balance = client.account.getBalanceById(balanceId);
-} catch (error) {
-    console.log('Request error', error);
+if(!balance.success) {
+    console.error('Request error', balance.error);
+
+    process.exit(1);
 }
 
-console.log(`[${balance.advancedBalanceId}] (${balance.currency}) \n\tAvalable for deposit: ${balance.availableCurrenciesForDeposit.join(', ')}`);
+console.log(`[${balance.response.advancedBalanceId}] (${balance.response.currency}) \n\tAvalable for deposit: ${balance.response.availableCurrenciesForDeposit.join(', ')}`);
 ```
 
 Or get list of advanced balances of user
 
 ```js
-let balances = [];
+const balances = await client.account.getBalances();
 
-try {
-    balances = client.account.getBalances();
-} catch (error) {
-    console.log('Request error', error);
+if(!balances.success) {
+    console.error('Request error', balances.error);
+
+    process.exit(1);
 }
 
-for(const balance of balances) {
+for(const balance of balances.response) {
     console.log(`[${balance.advancedBalanceId}] (${balance.currency}) \n\tAvalable for deposit: ${balance.availableCurrenciesForDeposit.join(', ')}`);
 }
 ```
@@ -136,8 +146,12 @@ const createOrder = async (currency, network, amount) => {
         returnUrl: 'https://merchant.domain',
         description: 'Buy some item',
     });
+    
+    if(!order.success) {
+        throw new Error(order.error.message);
+    }
 
-    return order.link;
+    return order.response.link;
 };
 
 (async () => {
@@ -164,6 +178,10 @@ const makeWithdrawal = async (currency, network, address, amount) => {
         amountTo: amount,
         webhookUrl: 'https://merchant.domain/webhook-url',
     });
+
+    if(!swap.success) {
+        throw new Error(swap.error.message);
+    }
 
     return swap.id;
 };

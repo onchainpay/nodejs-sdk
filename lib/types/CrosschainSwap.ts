@@ -1,7 +1,6 @@
 import { TNullableString } from './Base'
 
 export type TCrosschainExchangeRequest = {
-  advancedBalanceId: string;
   clientId: TNullableString;
   addressFromId: string;
   addressToId: string;
@@ -10,7 +9,6 @@ export type TCrosschainExchangeRequest = {
 };
 
 export type TCrosschainExchangeCommissionToken = {
-  advancedBalanceId: string;
   currencyFrom: string;
   currencyTo: string;
   networkFrom: string;

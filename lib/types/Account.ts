@@ -1,7 +1,6 @@
 import { TNullableString } from './Base'
 
 export type TPaymentAddressFilter = {
-  advancedBalanceId: string;
   currency: TNullableString;
   network: TNullableString;
 };

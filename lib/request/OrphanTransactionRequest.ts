@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { 
   TOrphanTrxListRequest, 
@@ -14,90 +11,18 @@ import {
 export default class OrphanTransactionRequest extends BaseClass {
 
   getTransaction(id: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/orphan-deposits/get-deposit',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseOrphanDeposit;
-    });
+    return this.core.makeRequest<TResponseOrphanDeposit>('/orphan-deposits/get-deposit', { id });
   }
 
   getListOfTransaction(req: TOrphanTrxListRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/orphan-deposits/get-deposits',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseOrphanDeposit[];
-    });
+    return this.core.makeRequest<TResponseOrphanDeposit[]>('/orphan-deposits/get-deposits', req);
   }
 
   getCommissionToken(id: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/orphan-deposits/withdrawal-token',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseOrphanWithdrawalToken;
-    });
+    return this.core.makeRequest<TResponseOrphanWithdrawalToken>('/orphan-deposits/withdrawal-token', { id });
   }
 
   withdrawal(req: TOrphanTrxCommissionToken) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/orphan-deposits/withdrawal',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseOrphan;
-    });
+    return this.core.makeRequest<TResponseOrphan>('/orphan-deposits/withdrawal', req);
   }
 }

@@ -3,7 +3,6 @@ import { TNullableString, TCurrencies } from './Base'
 export type TInvoiceStatus = 'CREATED' | 'INIT' | 'PENDING' | 'PROCESSED' | 'PARTIAL' | 'REJECTED' | 'ERROR' | 'EXPIRED' | 'OVERPAID';
 
 export type TInvoiceRequest = {
-  advancedBalanceId: string;
   externalId: TNullableString;
   currency: string;
   order: TNullableString;

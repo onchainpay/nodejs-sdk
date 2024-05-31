@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { 
   TBlockchainTrxByAddressFilter, 
@@ -18,244 +15,46 @@ import {
 
 export default class BlockchainAddressRequest extends BaseClass {
   searchById(id: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/addresses/find-by-id',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseBlockchainAddress | null;
-    });
+    return this.core.makeRequest<TResponseBlockchainAddress | null>('/addresses/find-by-id', { id });
   }
 
   addTrackingAddress(address: string, webhookUrl: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ address, webhookUrl });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/track-addresses/add-address',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseTrackedAddress;
-    });
+    return this.core.makeRequest<TResponseTrackedAddress>('/track-addresses/add-address', { address, webhookUrl });
   }
 
   searchByAddress(address: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ address });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/addresses/find-by-address',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseBlockchainAddress[];
-    });
+    return this.core.makeRequest<TResponseBlockchainAddress[]>('/addresses/find-by-address', { address });
   }
 
   setMetaData(id: string, meta: Object | String | null) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ id, meta });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/addresses/set-meta',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return success;
-    });
+    return this.core.makeRequest<null>('/addresses/set-meta', { id, meta });
   }
 
   getAddressTransactions(req: TBlockchainTrxByAddressFilter) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/addresses/transactions',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-      //console.log('getAddressTransactions', {success, error, response});
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseAddressTransactions;
-    });
+    return this.core.makeRequest<TResponseAddressTransactions>('/addresses/transactions', req);
   }
 
-  getListOfPayInAddresses(advancedBalanceId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ advancedBalanceId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/account-addresses',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponsePayInAddresses;
-    });
+  getListOfPayInAddresses() {
+    return this.core.makeRequest<TResponsePayInAddresses>('/account-addresses');
   }
 
-  getListOfBusinessAddresses(advancedBalanceId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ advancedBalanceId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/business-addresses',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseBusinessAddresses;
-    });
+  getListOfBusinessAddresses() {
+    return this.core.makeRequest<TResponseBusinessAddresses>('/business-addresses');
   }
 
-  getListOfRecurrentAddresses(advancedBalanceId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ advancedBalanceId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/recurrent-addresses',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseRecurrentAddresses;
-    });
+  getListOfRecurrentAddresses() {
+    return this.core.makeRequest<TResponseRecurrentAddresses>('/recurrent-addresses');
   }
 
-  getListOfPayOutAddresses(advancedBalanceId: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ advancedBalanceId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/payout-balances',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponsePayOutAddresses;
-    });
+  getListOfPayOutAddresses() {
+    return this.core.makeRequest<TResponsePayOutAddresses>('/payout-balances');
   }
 
   createBusinessWalletAddress(req: TBusinessWalletAddress) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/business-address',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-      //console.log('createBusinessWalletAddress', response);
-      return response as TResponseBusinessAddresses|TResponseExtendedAddress;
-    });
+    return this.core.makeRequest<TResponseBusinessAddresses|TResponseExtendedAddress>('/business-address', req);
   }
 
   createPayOutWalletAddress(currency: string, network: string) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ currency, network });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/payout-address',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-      //console.log('createPayOutWalletAddress', response);
-      return response as TResponsePayOutAddresses|TResponseExtendedAddress;
-    });
+    return this.core.makeRequest<TResponsePayOutAddresses|TResponseExtendedAddress>('/payout-address', { currency, network });
   }
 }

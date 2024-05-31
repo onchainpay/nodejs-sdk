@@ -1,7 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-import BaseClass, { OCPAPIReturnType } from './BaseClass';
-import { DataBuilder } from '../DataBuilder';
+import BaseClass from './BaseClass';
 
 import { TNullableString } from '../types/Base';
 import { 
@@ -14,68 +11,14 @@ import {
 export default class InvoiceRequest extends BaseClass {
 
   makeInvoice(req: TInvoiceRequest) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/make-invoice',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseMakeInvoice;
-    });
+    return this.core.makeRequest<TResponseMakeInvoice>('/make-invoice', req);
   }
 
   getInvoice(invoiceId: TNullableString = null) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder({ invoiceId });
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/get-invoice',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseMakeInvoice;
-    });
+    return this.core.makeRequest<TResponseMakeInvoice>('/get-invoice', { invoiceId });
   }
 
   getListOfInvoices(req: TInvoiceFilter) {
-    return this.exceptionWrapper(async () => {
-      const data: DataBuilder = new DataBuilder(req);
-      this.headerBuilder.setData(data);
-
-      const res: AxiosResponse = await this.axiosInstance.request(<AxiosRequestConfig>{
-        method: 'POST',
-        url: '/api-gateway/get-invoices',
-        data: data.valueOf(),
-        headers: this.headerBuilder.valueOf(),
-      });
-
-      const { success, response, error } = res.data;
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return response as TResponseGetInvoices;
-    });
+    return this.core.makeRequest<TResponseGetInvoices>('/get-invoices', req);
   }
 }
