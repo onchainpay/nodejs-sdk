@@ -32,7 +32,7 @@ const defaultAxiosOptions: AxiosRequestConfig = {
   },
 };
 
-export default class OnChainPay {
+export class OnChainPay {
   public base: BaseRequest;
   public account: AccountRequest;
   public address: AddressRequest;

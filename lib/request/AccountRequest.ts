@@ -11,7 +11,7 @@ import {
 
 export default class AccountRequest extends BaseClass {
 
-  getBalances(): OCPAPIReturnType {
+  getBalances() {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder();
       this.headerBuilder.setData(data);
@@ -33,7 +33,7 @@ export default class AccountRequest extends BaseClass {
     });
   }
 
-  getBalanceById(advancedBalanceId: string): OCPAPIReturnType {
+  getBalanceById(advancedBalanceId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ advancedBalanceId });
       this.headerBuilder.setData(data);
@@ -55,7 +55,7 @@ export default class AccountRequest extends BaseClass {
     });
   }
 
-  getPaymentAddressForBalanceTopUp(req: TPaymentAddressFilter): OCPAPIReturnType {
+  getPaymentAddressForBalanceTopUp(req: TPaymentAddressFilter) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

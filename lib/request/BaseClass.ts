@@ -21,7 +21,8 @@ export default class BaseClass {
     this.axiosInstance = axiosInstance;
   }
 
-  protected async exceptionWrapper(cb: Function): OCPAPIReturnType {
+  // @ts-ignore
+  protected async exceptionWrapper<T extends Function>(cb: T): ReturnType<T> {
     try {
       return await cb();
     } catch (exp: any) {

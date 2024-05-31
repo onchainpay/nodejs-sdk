@@ -13,7 +13,7 @@ import {
 
 export default class CrosschainSwapRequest extends BaseClass {
 
-  getCrosschainExchangeLimits(): OCPAPIReturnType {
+  getCrosschainExchangeLimits() {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder();
       this.headerBuilder.setData(data);
@@ -35,7 +35,7 @@ export default class CrosschainSwapRequest extends BaseClass {
     });
   }
 
-  getCrosschainExchangeInfo(id: string): OCPAPIReturnType {
+  getCrosschainExchangeInfo(id: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);
@@ -57,7 +57,7 @@ export default class CrosschainSwapRequest extends BaseClass {
     });
   }
 
-  getCrosschainExchangeCommissionToken(req: TCrosschainExchangeCommissionToken): OCPAPIReturnType {
+  getCrosschainExchangeCommissionToken(req: TCrosschainExchangeCommissionToken) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -79,7 +79,7 @@ export default class CrosschainSwapRequest extends BaseClass {
     });
   }
 
-  createCrosschainExchange(req: TCrosschainExchangeRequest): OCPAPIReturnType {
+  createCrosschainExchange(req: TCrosschainExchangeRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

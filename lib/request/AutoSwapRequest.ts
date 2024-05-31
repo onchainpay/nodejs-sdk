@@ -6,7 +6,7 @@ import { DataBuilder } from '../DataBuilder';
 import { TAutoSwapRequest, TResponseAutoSwap } from '../types/AutoSwap';
 
 export default class AutoSwapRequest extends BaseClass {
-  createAutoSwaps(req: TAutoSwapRequest): OCPAPIReturnType {
+  createAutoSwaps(req: TAutoSwapRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -28,7 +28,7 @@ export default class AutoSwapRequest extends BaseClass {
     });
   }
 
-  findAutoSwapById(id: string): OCPAPIReturnType {
+  findAutoSwapById(id: string) {
     return this.exceptionWrapper(async () => {
        const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);

@@ -12,7 +12,7 @@ import {
 } from '../types/KYT';
 
 export default class KYTRequest extends BaseClass {
-  checkTransactionRisks(req: TKYTTransactionCheckRequest): OCPAPIReturnType {
+  checkTransactionRisks(req: TKYTTransactionCheckRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -34,7 +34,7 @@ export default class KYTRequest extends BaseClass {
     });
   }
 
-  checkWithdrawalRisks(req: TKYTWithdrawalCheckRequest): OCPAPIReturnType {
+  checkWithdrawalRisks(req: TKYTWithdrawalCheckRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -56,7 +56,7 @@ export default class KYTRequest extends BaseClass {
     });
   }
 
-  checkWithdrawalRisksForAddress(req: TKYTWithdrawalForAddressCheckRequest): OCPAPIReturnType {
+  checkWithdrawalRisksForAddress(req: TKYTWithdrawalForAddressCheckRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

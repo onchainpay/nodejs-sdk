@@ -13,7 +13,7 @@ import {
 
 export default class OrphanTransactionRequest extends BaseClass {
 
-  getTransaction(id: string): OCPAPIReturnType {
+  getTransaction(id: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);
@@ -35,7 +35,7 @@ export default class OrphanTransactionRequest extends BaseClass {
     });
   }
 
-  getListOfTransaction(req: TOrphanTrxListRequest): OCPAPIReturnType {
+  getListOfTransaction(req: TOrphanTrxListRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -57,7 +57,7 @@ export default class OrphanTransactionRequest extends BaseClass {
     });
   }
 
-  getCommissionToken(id: string): OCPAPIReturnType {
+  getCommissionToken(id: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);
@@ -79,7 +79,7 @@ export default class OrphanTransactionRequest extends BaseClass {
     });
   }
 
-  withdrawal(req: TOrphanTrxCommissionToken): OCPAPIReturnType {
+  withdrawal(req: TOrphanTrxCommissionToken) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

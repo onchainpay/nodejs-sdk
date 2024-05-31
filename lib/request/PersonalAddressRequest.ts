@@ -15,7 +15,7 @@ import {
 
 export default class PersonalAddressRequest extends BaseClass {
 
-  saveUser(req: TMerchantUserEntity): OCPAPIReturnType {
+  saveUser(req: TMerchantUserEntity) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -37,7 +37,7 @@ export default class PersonalAddressRequest extends BaseClass {
     });
   }
 
-  getAddress(req: TUserAddressRequest): OCPAPIReturnType {
+  getAddress(req: TUserAddressRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -59,7 +59,7 @@ export default class PersonalAddressRequest extends BaseClass {
     });
   }
 
-  getListOfAddresses(req: TPersonalAddressFilter): OCPAPIReturnType {
+  getListOfAddresses(req: TPersonalAddressFilter) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -81,7 +81,7 @@ export default class PersonalAddressRequest extends BaseClass {
     });
   }
 
-  getUser(id: TNullableString = null, clientId: TNullableString = null): OCPAPIReturnType {
+  getUser(id: TNullableString = null, clientId: TNullableString = null) {
     return this.exceptionWrapper(async () => {
       if (!clientId && !id) {
         throw new Error('Need to pass UserId or ClientId');

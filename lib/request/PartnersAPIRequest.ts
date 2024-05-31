@@ -27,7 +27,7 @@ import { TPagination } from '../types/Base';
 
 export default class PartnersAPIRequest extends BaseClass {
 
-  createUser(email: string): OCPAPIReturnType {
+  createUser(email: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ email });
       this.headerBuilder.setData(data);
@@ -49,7 +49,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getUser(userId: string): OCPAPIReturnType {
+  getUser(userId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id: userId });
       this.headerBuilder.setData(data);
@@ -71,7 +71,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getUsers(req: TPagination): OCPAPIReturnType {
+  getUsers(req: TPagination) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -93,7 +93,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  createOrganization(userId: string, name: string): OCPAPIReturnType {
+  createOrganization(userId: string, name: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ userId, name });
       this.headerBuilder.setData(data);
@@ -118,7 +118,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getOrganizations(req: TPartnersAPIOrganizationListRequest): OCPAPIReturnType {
+  getOrganizations(req: TPartnersAPIOrganizationListRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -140,7 +140,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getUserBalances(userId: string): OCPAPIReturnType {
+  getUserBalances(userId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ userId });
       this.headerBuilder.setData(data);
@@ -162,7 +162,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  replenishmentOfUserBalance(req: TPartnersAPIReplenishmentOfUserBalanceRequest): OCPAPIReturnType {
+  replenishmentOfUserBalance(req: TPartnersAPIReplenishmentOfUserBalanceRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -184,7 +184,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getGeneralTariffs(): OCPAPIReturnType {
+  getGeneralTariffs() {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder();
       this.headerBuilder.setData(data);
@@ -206,7 +206,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  saveIndividualTariff(req: TPartnersAPIIndividualTariffEntityRequest): OCPAPIReturnType {
+  saveIndividualTariff(req: TPartnersAPIIndividualTariffEntityRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -228,7 +228,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getIndividualTariffs(userId: TNullableString = null, organizationId: TNullableString = null): OCPAPIReturnType {
+  getIndividualTariffs(userId: TNullableString = null, organizationId: TNullableString = null) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ userId, organizationId });
       this.headerBuilder.setData(data);
@@ -250,7 +250,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  createAPIkey(req: TPartnersAPIKeyRequest): OCPAPIReturnType {
+  createAPIkey(req: TPartnersAPIKeyRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -272,7 +272,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  getAPIkeys(req: TPartnersAPIKeyListRequest): OCPAPIReturnType {
+  getAPIkeys(req: TPartnersAPIKeyListRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -294,7 +294,7 @@ export default class PartnersAPIRequest extends BaseClass {
     });
   }
 
-  deleteAPIkeys(req: TPartnersAPIKeyDeleteRequest): OCPAPIReturnType {
+  deleteAPIkeys(req: TPartnersAPIKeyDeleteRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

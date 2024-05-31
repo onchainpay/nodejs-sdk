@@ -16,7 +16,7 @@ import {
 } from '../types/RecurringPayment';
 
 export default class RecurringPaymentRequest extends BaseClass {
-  createPaymentLink(req: TPaymentLinkRequest): OCPAPIReturnType {
+  createPaymentLink(req: TPaymentLinkRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -38,7 +38,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  getPaymentLink(id: string, merchantId: string): OCPAPIReturnType {
+  getPaymentLink(id: string, merchantId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id, merchantId });
       this.headerBuilder.setData(data);
@@ -60,7 +60,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  getPaymentLinksByUser(req: TPaymentLinksByUserRequest): OCPAPIReturnType {
+  getPaymentLinksByUser(req: TPaymentLinksByUserRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -82,7 +82,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  disablePaymentLink(id: string, merchantId: string): OCPAPIReturnType {
+  disablePaymentLink(id: string, merchantId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id, merchantId });
       this.headerBuilder.setData(data);
@@ -104,7 +104,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  createSubscription(req: TSubscriptionRequest): OCPAPIReturnType {
+  createSubscription(req: TSubscriptionRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -126,7 +126,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
  
-  getSubscription(id: string, merchantId: string): OCPAPIReturnType {
+  getSubscription(id: string, merchantId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id, merchantId });
       this.headerBuilder.setData(data);
@@ -148,7 +148,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  cancelSubscription(id: string, merchantId: string): OCPAPIReturnType {
+  cancelSubscription(id: string, merchantId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id, merchantId });
       this.headerBuilder.setData(data);
@@ -170,7 +170,7 @@ export default class RecurringPaymentRequest extends BaseClass {
     });
   }
 
-  createPayment(req: TPaymentRequest): OCPAPIReturnType {
+  createPayment(req: TPaymentRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

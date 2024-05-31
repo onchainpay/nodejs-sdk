@@ -14,7 +14,7 @@ import {
 
 export default class AddressRequest extends BaseClass {
 
-  addAddress(req: TNewAddressEntity): OCPAPIReturnType {
+  addAddress(req: TNewAddressEntity) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -36,7 +36,7 @@ export default class AddressRequest extends BaseClass {
     });
   }
 
-  deleteAddress(addressId: TNullableString = null): OCPAPIReturnType {
+  deleteAddress(addressId: TNullableString = null) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ addressId });
       this.headerBuilder.setData(data);
@@ -58,7 +58,7 @@ export default class AddressRequest extends BaseClass {
     });
   }
 
-  updateAddress(req: TExistingAddressEntity): OCPAPIReturnType {
+  updateAddress(req: TExistingAddressEntity) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -80,7 +80,7 @@ export default class AddressRequest extends BaseClass {
     });
   }
 
-  getListOfAddresses(req: TAddressPagination): OCPAPIReturnType {
+  getListOfAddresses(req: TAddressPagination) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

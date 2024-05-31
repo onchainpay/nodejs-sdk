@@ -7,7 +7,7 @@ import { TWebhookFields, TResponseWebhook, TResponseWebhookGetVerbose } from '..
 
 export default class WebhookRequest extends BaseClass {
 
-  getWebhook(webhookId: string): OCPAPIReturnType {
+  getWebhook(webhookId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ webhookId });
       this.headerBuilder.setData(data);
@@ -29,7 +29,7 @@ export default class WebhookRequest extends BaseClass {
     });
   }
 
-  getWebhookExt(webhookId: string, fields: TWebhookFields[] | undefined = undefined): OCPAPIReturnType {
+  getWebhookExt(webhookId: string, fields: TWebhookFields[] | undefined = undefined) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ webhookId, fields });
       this.headerBuilder.setData(data);

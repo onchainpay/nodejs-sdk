@@ -13,7 +13,7 @@ import {
 
 export default class InvoiceRequest extends BaseClass {
 
-  makeInvoice(req: TInvoiceRequest): OCPAPIReturnType {
+  makeInvoice(req: TInvoiceRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -35,7 +35,7 @@ export default class InvoiceRequest extends BaseClass {
     });
   }
 
-  getInvoice(invoiceId: TNullableString = null): OCPAPIReturnType {
+  getInvoice(invoiceId: TNullableString = null) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ invoiceId });
       this.headerBuilder.setData(data);
@@ -57,7 +57,7 @@ export default class InvoiceRequest extends BaseClass {
     });
   }
 
-  getListOfInvoices(req: TInvoiceFilter): OCPAPIReturnType {
+  getListOfInvoices(req: TInvoiceFilter) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);

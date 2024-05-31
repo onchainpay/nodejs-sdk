@@ -26,7 +26,7 @@ and get api-keys.
 *Substitute keys in class call:*
 
 ```js
-const OnChainPay = require('onchainpay-sdk');
+const { OnChainPay } = require('onchainpay-sdk');
 
 const client = new OnChainPay('__PUBLIC_KEY__', '__PRIVATE_KEY__');
 ```
@@ -121,23 +121,12 @@ for(const balance of balances) {
 ### Create order
 
 ```js
-const OnChainPay = require('onchainpay-sdk');
+const { OnChainPay } = require('onchainpay-sdk');
 
-(async () => {
-    const orderLink = await createOrder("USDT", "tron", "1000")
-
-    //
-})();
+const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
 
 const createOrder = async (currency, network, amount) => {
-    const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
-
-    const advancedBalances = await client.account.getBalances();
-
-    const advancedBalance = advancedBalances[0];
-
     const order = await client.order.makeOrder({
-        advancedBalanceId: advancedBalance.advancedBalanceId,
         currency: currency,
         network: network,
         amount: amount,
@@ -150,22 +139,24 @@ const createOrder = async (currency, network, amount) => {
 
     return order.link;
 };
+
+(async () => {
+    // your code
+    
+    const orderLink = await createOrder("USDT", "tron", "1000")
+
+    // your code
+})();
 ```
 
 ### Auto-swap to external address
 
 ```js
-const OnChainPay = require('onchainpay-sdk');
+const { OnChainPay } = require('onchainpay-sdk');
 
-(async () => {
-    const autoSwapId = await makeWithdrawal("USDT", "tron", "TUfVHn...DDC", "100")
-
-    //
-})();
+const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
 
 const makeWithdrawal = async (currency, network, address, amount) => {
-    const client = new OnChainPay("__PUBLIC_KEY__", "__PRIVATE_KEY__");
-
     const swap = await client.autoSwap.createAutoSwaps({
         address: address,
         currency: currency,
@@ -176,4 +167,12 @@ const makeWithdrawal = async (currency, network, address, amount) => {
 
     return swap.id;
 };
+
+(async () => {
+    // your code 
+    
+    const autoSwapId = await makeWithdrawal("USDT", "tron", "TUfVHn...DDC", "100")
+
+    // your code 
+})();
 ```

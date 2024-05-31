@@ -12,7 +12,7 @@ import {
 
 export default class WithdrawalRequest extends BaseClass {
 
-  getCommissionForMakingWithdrawal(req: TWithdrawalCommissionRequest): OCPAPIReturnType {
+  getCommissionForMakingWithdrawal(req: TWithdrawalCommissionRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -34,7 +34,7 @@ export default class WithdrawalRequest extends BaseClass {
     });
   }
 
-  makeWithdrawal(req: TWithdrawalRequest): OCPAPIReturnType {
+  makeWithdrawal(req: TWithdrawalRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -56,7 +56,7 @@ export default class WithdrawalRequest extends BaseClass {
     });
   }
 
-  makeWithdrawalAsync(req: TWithdrawalRequest): OCPAPIReturnType {
+  makeWithdrawalAsync(req: TWithdrawalRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -78,7 +78,7 @@ export default class WithdrawalRequest extends BaseClass {
     });
   }
 
-  getWithdrawal(withdrawalId: string): OCPAPIReturnType {
+  getWithdrawal(withdrawalId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ withdrawalId });
       this.headerBuilder.setData(data);

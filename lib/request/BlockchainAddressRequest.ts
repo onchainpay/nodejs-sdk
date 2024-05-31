@@ -17,7 +17,7 @@ import {
 } from '../types/BlockchainAddress';
 
 export default class BlockchainAddressRequest extends BaseClass {
-  searchById(id: string): OCPAPIReturnType {
+  searchById(id: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);
@@ -39,7 +39,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  addTrackingAddress(address: string, webhookUrl: string): OCPAPIReturnType {
+  addTrackingAddress(address: string, webhookUrl: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ address, webhookUrl });
       this.headerBuilder.setData(data);
@@ -61,7 +61,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  searchByAddress(address: string): OCPAPIReturnType {
+  searchByAddress(address: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ address });
       this.headerBuilder.setData(data);
@@ -83,7 +83,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  setMetaData(id: string, meta: Object | String | null): OCPAPIReturnType {
+  setMetaData(id: string, meta: Object | String | null) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id, meta });
       this.headerBuilder.setData(data);
@@ -105,7 +105,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  getAddressTransactions(req: TBlockchainTrxByAddressFilter): OCPAPIReturnType {
+  getAddressTransactions(req: TBlockchainTrxByAddressFilter) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -127,7 +127,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  getListOfPayInAddresses(advancedBalanceId: string): OCPAPIReturnType {
+  getListOfPayInAddresses(advancedBalanceId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ advancedBalanceId });
       this.headerBuilder.setData(data);
@@ -149,7 +149,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  getListOfBusinessAddresses(advancedBalanceId: string): OCPAPIReturnType {
+  getListOfBusinessAddresses(advancedBalanceId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ advancedBalanceId });
       this.headerBuilder.setData(data);
@@ -171,7 +171,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  getListOfRecurrentAddresses(advancedBalanceId: string): OCPAPIReturnType {
+  getListOfRecurrentAddresses(advancedBalanceId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ advancedBalanceId });
       this.headerBuilder.setData(data);
@@ -193,7 +193,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  getListOfPayOutAddresses(advancedBalanceId: string): OCPAPIReturnType {
+  getListOfPayOutAddresses(advancedBalanceId: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ advancedBalanceId });
       this.headerBuilder.setData(data);
@@ -215,7 +215,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  createBusinessWalletAddress(req: TBusinessWalletAddress): OCPAPIReturnType {
+  createBusinessWalletAddress(req: TBusinessWalletAddress) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -237,7 +237,7 @@ export default class BlockchainAddressRequest extends BaseClass {
     });
   }
 
-  createPayOutWalletAddress(currency: string, network: string): OCPAPIReturnType {
+  createPayOutWalletAddress(currency: string, network: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ currency, network });
       this.headerBuilder.setData(data);

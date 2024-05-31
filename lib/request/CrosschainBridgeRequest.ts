@@ -13,7 +13,7 @@ import {
 
 export default class CrosschainBridgeRequest extends BaseClass {
 
-  getCrosschainTransferLimits(): OCPAPIReturnType {
+  getCrosschainTransferLimits() {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder();
       this.headerBuilder.setData(data);
@@ -35,7 +35,7 @@ export default class CrosschainBridgeRequest extends BaseClass {
     });
   }
 
-  getCrosschainTransferInfo(id: string): OCPAPIReturnType {
+  getCrosschainTransferInfo(id: string) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder({ id });
       this.headerBuilder.setData(data);
@@ -57,7 +57,7 @@ export default class CrosschainBridgeRequest extends BaseClass {
     });
   }
 
-  getCrosschainTransferCommissionToken(req: TCrosschainTransferCommissionToken): OCPAPIReturnType {
+  getCrosschainTransferCommissionToken(req: TCrosschainTransferCommissionToken) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
@@ -79,7 +79,7 @@ export default class CrosschainBridgeRequest extends BaseClass {
     });
   }
 
-  createCrosschainTransfer(req: TCrosschainTransferRequest): OCPAPIReturnType {
+  createCrosschainTransfer(req: TCrosschainTransferRequest) {
     return this.exceptionWrapper(async () => {
       const data: DataBuilder = new DataBuilder(req);
       this.headerBuilder.setData(data);
