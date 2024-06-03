@@ -11,6 +11,26 @@ import {
 
 export default class OrderRequest extends BaseClass {
   makeOrder(req: TOrderEntity) {
+    if(!req.lifetime) {
+
+      switch(req.network) {
+        case 'ripple':
+        case 'bsc':
+        case 'tron':
+        case 'ethereum':
+        case 'fantom':
+          req.lifetime = 1800;
+          break
+        case 'litecoin':
+          req.lifetime = 3600;
+          break
+        case 'bitcoin':
+        case 'bitcoincash':
+          req.lifetime = 7200;
+          break
+      }
+    }
+
     return this.core.makeRequest<TResponseMakeOrder>('/make-order', req);
   }
 
